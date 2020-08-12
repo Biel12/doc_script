@@ -1,0 +1,18 @@
+<VirtualHost *:9000>
+	WSGIPassAuthorization On
+	WSGIDaemonProcess wapp_zurich_servicio python-home=/var/www/virtualenv/
+	WSGIProcessGroup wapp_zurich_servicio
+	WSGIScriptAlias / /var/www/icarus_zurich_soap/wsgi.py
+	ErrorLog /var/log/httpd/error_log.log
+	CustomLog /var/log/httpd/access.log combined
+	WSGIApplicationGroup %{GLOBAL} 
+	<Directory /var/www/icarus_zurich_soap/icarus_zurich_soap/>
+		Order allow,deny
+		Allow from all
+	</Directory>
+		Alias /static /var/www/icarus_zurich_soap/icarus_zurich_soap/static
+	<Directory /var/www/icarus_zurich_soap/icarus_zurich_soap/static/>
+		Order allow,deny
+		Allow from all
+	</Directory>
+</VirtualHost>
